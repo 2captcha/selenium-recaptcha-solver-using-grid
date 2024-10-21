@@ -1,6 +1,8 @@
 # reCAPTCHA Solver Using 2Captcha and Selenium
 
-This project automates solving Google reCAPTCHA v2 with image challenges (3x3 and 4x4) using the 2Captcha service and Selenium WebDriver. The script programmatically interacts with reCAPTCHA, retrieves data for solving, sends it to 2Captcha for processing, and then submits the solution.
+This project automates solving Google [reCAPTCHA] v2 with image challenges (3x3 and 4x4) using the 2Captcha service and Selenium WebDriver. The script programmatically interacts with reCAPTCHA, retrieves data for solving, sends it to 2Captcha for processing, and then submits the solution.
+
+If you are using JavaScript, we also have a similar example for JavaScript Puppeteer, the example is in the [reCAPTCHA Solver using 2Captcha and Puppeteer] repository.
 
 ## Features
 
@@ -81,5 +83,7 @@ The project follows a modular design for better maintainability:
 [2captcha]: https://2captcha.com
 [selenium]: https://pypi.org/project/selenium/
 [2captcha-python]: https://github.com/2captcha/2captcha-python
+[reCAPTCHA Solver using 2Captcha and Puppeteer]: https://github.com/2captcha/puppeteer-recaptcha-solver-using-clicks
+[reCAPTCHA]: https://2captcha.com/p/bypass-recaptcha
 
 
