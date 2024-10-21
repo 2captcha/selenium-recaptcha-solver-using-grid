@@ -25,8 +25,8 @@ The project is structured as follows:
 ### Clone:
 
 ```
-git clone git@github.com:2captcha/recaptcha-solver-using-grid.git
-cd recaptcha-solver-using-grid
+git clone git@github.com:2captcha/selenium-recaptcha-solver-using-grid.git
+cd selenium-recaptcha-solver-using-grid
 ```
 
 ### Requirements
@@ -49,7 +49,7 @@ Set the `APIKEY` environment variable. You can get the `APIKEY` value in your pe
 
 ### Example Command
 ```bash
-python solve_recaptcha.py
+python main.py
 ```
 
 ## How It Works
