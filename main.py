@@ -8,7 +8,7 @@ from utils.helpers import CaptchaHelper
 # CONFIGURATION
 url = "https://2captcha.com/demo/recaptcha-v2"
 apikey = os.getenv('APIKEY_2CAPTCHA')  # Get the API key for the 2Captcha service from environment variables
-solver = TwoCaptcha(apikey)
+solver = TwoCaptcha(apikey, pollingInterval=1)
 
 # LOCATORS
 l_iframe_captcha = "//iframe[@title='reCAPTCHA']"
