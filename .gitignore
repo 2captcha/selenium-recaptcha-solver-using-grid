@@ -129,4 +129,5 @@ dmypy.json
 .pyre/
 
 .idea
+.DS_Store
 proxies_extension.zip

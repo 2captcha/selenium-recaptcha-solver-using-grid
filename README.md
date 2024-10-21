@@ -4,10 +4,19 @@ This project automates solving Google reCAPTCHA v2 with image challenges (3x3 an
 
 ## Features
 
-- Uses **Selenium WebDriver** to interact with the browser and manipulate elements on the reCAPTCHA page.
-- **2Captcha API** helps solve image-based captchas using artificial intelligence.
+- **Selenium WebDriver**: Interacts with the browser and manipulates elements on the reCAPTCHA page.
+- **2Captcha API**: Solves image-based captchas using artificial intelligence.
 - Handles both **3x3** and **4x4** captchas with custom logic for each.
-- Tracks image updates and handles captcha error messages efficiently.
+- Modular design with separated logic into helper classes for easy code maintenance and future expansion.
+- Tracks image updates and handles captcha error messages efficiently using custom error handling.
+
+## Code Structure
+
+The project is structured as follows:
+
+- **`utils/actions.py`**: Contains the `PageActions` class, which encapsulates common browser actions (clicking, switching frames, etc.).
+- **`utils/helpers.py`**: Contains the `CaptchaHelper` class, responsible for solving captchas, executing JS, and handling captcha error messages.
+- **`js_scripts/`**: JavaScript files that extract captcha data and track image updates.
 
 ## Usage
 
@@ -43,16 +52,28 @@ python solve_recaptcha.py
 
 ## How It Works
 
-1. Browser Initialization: A browser is opened using Selenium WebDriver.
-2. Captcha Data Retrieval: JavaScript extracts the image tiles from reCAPTCHA and sends them to the 2Captcha service for solving.
-3. Captcha Submission: Once a solution is received from 2Captcha, Selenium simulates clicking on the correct image tiles based on the solution.
-4. Captcha Submission: The solution is submitted once the captcha is solved.
+1. **Browser Initialization:** A browser is opened using Selenium WebDriver.
+2. **Captcha Data Retrieval:** JavaScript extracts the image tiles from reCAPTCHA and sends them to the 2Captcha service for solving.
+3. **Captcha Submission:** Once a solution is received from 2Captcha, Selenium simulates clicking on the correct image tiles based on the solution.
+4. **Final Submission:** The solution is submitted once the captcha is solved.
 
 ## Captcha Solving Logic
 
-- For 3x3 captchas, the previous captcha ID (previousID) is saved to speed up solving when images are updated.
-- For 4x4 captchas, no previousID is saved, and each solution is processed from scratch.
-- Error messages, such as “Please try again” are handled, and the solving process is retried if needed.
+- **3x3 Captchas:** Previous captcha ID (previousID) is saved to speed up solving when images are updated.
+- **4x4 Captchas:** No previousID is saved, and each solution is processed from scratch.
+- **Error Handling:** Messages like “Please try again” are handled, and the solving process is retried if needed.
+
+## Modular Design
+
+The project follows a modular design for better maintainability:
+
+- **PageActions Class:** Handles general browser interactions like switching to iframes, clicking elements, and returning focus to the main content.
+- **CaptchaHelper Class:** Encapsulates captcha-specific logic, such as solving the captcha via 2Captcha API, handling error messages, and executing JavaScript in the browser.
+
+## JavaScript Scripts
+
+- `get_captcha_data.js`: Extracts captcha image tiles for solving. The source code of the script is located here https://gist.github.com/kratzky/20ea5f4f142cec8f1de748b3f3f84bfc
+- `track_image_updates.js`: Monitors requests to check if captcha images are updated.
 
 <!-- Shared links -->
 [2captcha-demo]: https://2captcha.com/demo
