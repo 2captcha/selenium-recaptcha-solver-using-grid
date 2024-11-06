@@ -50,6 +50,8 @@ Set the `APIKEY` environment variable. You can get the `APIKEY` value in your pe
 
 `export APIKEY=your_api_key`
 
+You can also set the value of `APIKEY` directly in the code. To do this, modify the `apikey` value in the following file: [main.py, line 10].
+
 ### Example Command
 ```bash
 python main.py
@@ -87,6 +89,7 @@ The project follows a modular design for better maintainability:
 [selenium]: https://pypi.org/project/selenium/
 [2captcha-python]: https://github.com/2captcha/2captcha-python
 [reCAPTCHA Solver using 2Captcha and Puppeteer]: https://github.com/2captcha/puppeteer-recaptcha-solver-using-clicks
+[main.py, line 10]: ./main.py#L10
 [reCAPTCHA]: https://2captcha.com/p/bypass-recaptcha
 
 
