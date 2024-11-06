@@ -11,15 +11,19 @@ apikey = os.getenv('APIKEY_2CAPTCHA')  # Get the API key for the 2Captcha servic
 solver = TwoCaptcha(apikey, pollingInterval=1)
 
 # LOCATORS
-l_iframe_captcha = "//iframe[@title='reCAPTCHA']"
-l_checkbox_captcha = "//span[@role='checkbox']"
-l_popup_captcha = "//iframe[contains(@title, 'two minutes')]"
-l_verify_button = "//button[@id='recaptcha-verify-button']"
-l_submit_button_captcha = "//button[@type='submit']"
-l_try_again = "//div[@class='rc-imageselect-incorrect-response']"
-l_select_more = "//div[@class='rc-imageselect-error-select-more']"
-l_dynamic_more = "//div[@class='rc-imageselect-error-dynamic-more']"
-l_select_something = "//div[@class='rc-imageselect-error-select-something']"
+
+# CAPTCHA LOCATORS
+c_iframe_captcha = "//iframe[@title='reCAPTCHA']"
+c_checkbox_captcha = "//span[@role='checkbox']"
+c_popup_captcha = "//iframe[contains(@title, 'two minutes')]"
+c_verify_button = "//button[@id='recaptcha-verify-button']"
+c_try_again = "//div[@class='rc-imageselect-incorrect-response']"
+c_select_more = "//div[@class='rc-imageselect-error-select-more']"
+c_dynamic_more = "//div[@class='rc-imageselect-error-dynamic-more']"
+c_select_something = "//div[@class='rc-imageselect-error-select-something']"
+
+# PAGE LOCATORS (For another page the value of this locator needs to be changed)
+p_submit_button_captcha = "//button[@type='submit']"
 
 # MAIN LOGIC
 options = webdriver.ChromeOptions()
@@ -34,10 +38,10 @@ with webdriver.Chrome(options=options) as browser:
     captcha_helper = CaptchaHelper(browser, solver)
 
     # We start by clicking on the captcha checkbox
-    page_actions.switch_to_iframe(l_iframe_captcha)
-    page_actions.click_checkbox(l_checkbox_captcha)
+    page_actions.switch_to_iframe(c_iframe_captcha)
+    page_actions.click_checkbox(c_checkbox_captcha)
     page_actions.switch_to_default_content()
-    page_actions.switch_to_iframe(l_popup_captcha)
+    page_actions.switch_to_iframe(c_popup_captcha)
     time.sleep(1)
 
     # Load JS files
@@ -102,13 +106,13 @@ with webdriver.Chrome(options=options) as browser:
                     continue  # Continue the loop
 
                 # Press the check button after clicks
-                page_actions.click_check_button(l_verify_button)
+                page_actions.click_check_button(c_verify_button)
 
             # Processing for 4x4
             elif params['cols'] == 4:
                 # Click on the answers found and immediately press the check button
                 page_actions.clicks(number_list)
-                page_actions.click_check_button(l_verify_button)
+                page_actions.click_check_button(c_verify_button)
 
                 # After clicking, we check for errors and image updates
                 image_update = page_actions.check_for_image_updates()
@@ -118,22 +122,22 @@ with webdriver.Chrome(options=options) as browser:
                     continue  # Continue the loop
 
             # If the images are not updated, check the error messages
-            if captcha_helper.handle_error_messages(l_try_again, l_select_more, l_dynamic_more, l_select_something):
+            if captcha_helper.handle_error_messages(c_try_again, c_select_more, c_dynamic_more, c_select_something):
                 continue  # If an error is visible, restart the loop
 
             # If there are no errors, send the captcha
             page_actions.switch_to_default_content()
-            page_actions.click_check_button(l_submit_button_captcha)
+            page_actions.click_check_button(p_submit_button_captcha)
             break  # Exit the loop if the captcha is solved
 
         elif 'no_matching_images' in result['code']:
             # If the captcha returned the code "no_matching_images", check the errors
-            page_actions.click_check_button(l_verify_button)
-            if captcha_helper.handle_error_messages(l_try_again, l_select_more, l_dynamic_more, l_select_something):
+            page_actions.click_check_button(c_verify_button)
+            if captcha_helper.handle_error_messages(c_try_again, c_select_more, c_dynamic_more, c_select_something):
                 continue  # Restart the loop if an error is visible
             else:
                 page_actions.switch_to_default_content()
-                page_actions.click_check_button(l_submit_button_captcha)
+                page_actions.click_check_button(p_submit_button_captcha)
                 break  # Exit loop
 
     time.sleep(10)
