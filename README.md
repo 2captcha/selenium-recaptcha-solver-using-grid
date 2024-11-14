@@ -1,8 +1,12 @@
 # reCAPTCHA Solver Using 2Captcha and Selenium
 
-This project automates solving Google [reCAPTCHA] v2 with image challenges (3x3 and 4x4) using the 2Captcha service and Selenium WebDriver. The script programmatically interacts with reCAPTCHA, retrieves data for solving, sends it to 2Captcha for processing, and then submits the solution.
+This project automates [bypass Google reCAPTCHA] v2 with image challenges (3x3 and 4x4) using the 2Captcha service 
+([captcha solver]) and Selenium WebDriver. The script programmatically interacts with reCAPTCHA, retrieves data for 
+solving, sends it to [reCAPTCHA solver] for processing, and then submits the solution.
 
 ![bypass_recaptcha_v2_selenium_final2.gif](media%2Fbypass_recaptcha_v2_selenium_final2.gif)
+
+2Captcha service allows you to bypass any CAPTCHA using Selenium. You can find more details on [Selenium captcha solver] page.
 
 If you are using JavaScript, we also have a similar example for JavaScript Puppeteer, the example is in the [reCAPTCHA Solver using 2Captcha and Puppeteer] repository.
 
@@ -85,11 +89,11 @@ The project follows a modular design for better maintainability:
 <!-- Shared links -->
 [2captcha-demo]: https://2captcha.com/demo
 [recaptcha-v2-demo]: https://2captcha.com/demo/recaptcha-v2
-[2captcha]: https://2captcha.com
 [selenium]: https://pypi.org/project/selenium/
 [2captcha-python]: https://github.com/2captcha/2captcha-python
 [reCAPTCHA Solver using 2Captcha and Puppeteer]: https://github.com/2captcha/puppeteer-recaptcha-solver-using-clicks
 [main.py, line 10]: ./main.py#L10
-[reCAPTCHA]: https://2captcha.com/p/bypass-recaptcha
-
-
+[bypass Google reCAPTCHA]: https://2captcha.com/p/bypass-recaptcha
+[captcha solver]: https://2captcha.com/
+[reCAPTCHA solver]:https://2captcha.com/
+[Selenium captcha solver]: https://2captcha.com/p/selenium-captcha-solver
