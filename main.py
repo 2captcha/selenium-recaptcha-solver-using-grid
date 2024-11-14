@@ -84,7 +84,7 @@ with webdriver.Chrome(options=options) as browser:
             break
 
         # Check if the captcha was solved successfully
-        elif result and 'no_matching_images' not in result['code']:
+        elif result and 'No_matching_images' not in result['code']:
             # We save the id only on the first successful iteration for 3x3 captcha
             if id is None and params['cols'] == 3 and result['captchaId']:
                 id = result['captchaId']  # Save id for subsequent iterations
@@ -130,7 +130,7 @@ with webdriver.Chrome(options=options) as browser:
             page_actions.click_check_button(p_submit_button_captcha)
             break  # Exit the loop if the captcha is solved
 
-        elif 'no_matching_images' in result['code']:
+        elif 'No_matching_images' in result['code']:
             # If the captcha returned the code "no_matching_images", check the errors
             page_actions.click_check_button(c_verify_button)
             if captcha_helper.handle_error_messages(c_try_again, c_select_more, c_dynamic_more, c_select_something):
