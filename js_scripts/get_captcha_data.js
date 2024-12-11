@@ -45,7 +45,7 @@ window.getCaptchaData = () => {
                 rows: 4,
                 columns: 4,
                 comment,
-                body: canvas.toDataURL().replace(/^data:image\/?[A-z]*;base64,/, ''),
+                body: canvas.toDataURL('image/jpeg', 0.8).replace(/^data:image\/jpeg;base64,/, ''),
                 type: 'GridTask'
             });
         }
