@@ -32,7 +32,7 @@ The project is structured as follows:
 ### Clone:
 
 ```
-git clone git@github.com:2captcha/selenium-recaptcha-solver-using-grid.git
+git clone https://github.com/2captcha/selenium-recaptcha-solver-using-grid.git
 cd selenium-recaptcha-solver-using-grid
 ```
 
@@ -50,11 +50,13 @@ pip install -r requirements.txt
 
 ### Configure:
 
-Set the `APIKEY` environment variable. You can get the `APIKEY` value in your personal [2captcha account][2captcha].
-
+For Linux/Mac:
 `export APIKEY=your_api_key`
 
-You can also set the value of `APIKEY` directly in the code. To do this, modify the `apikey` value in the following file: [main.py, line 10].
+For Windows:
+`set APIKEY=your_api_key`
+
+You can also set the value of `APIKEY` directly in the code. To do this, modify the `apikey` value in the following file: [main.py line 10].
 
 ### Example Command
 ```bash
