@@ -2,13 +2,14 @@ window.getCaptchaData = () => {
     return new Promise((resolve, reject) => {
         let canvas = document.createElement('canvas');
         let ctx = canvas.getContext('2d');
-        let comment = document.querySelector('.rc-imageselect-desc-wrapper').innerText.replace(/\n/g, ' ');
+        let comment = document.querySelector('.rc-imageselect-desc-wrapper')?.innerText?.replace(/\n/g, ' ') || '';
 
         let img4x4 = document.querySelector('img.rc-image-tile-44');
         if (!img4x4) {
             let table3x3 = document.querySelector('table.rc-imageselect-table-33 > tbody');
             if (!table3x3) {
                 reject('Can not find reCAPTCHA elements');
+                return;
             }
 
             let initial3x3img = table3x3.querySelector('img.rc-image-tile-33');
@@ -26,7 +27,7 @@ window.getCaptchaData = () => {
                     { x: 0, y: ctx.canvas.height / 3 * 2 }, { x: ctx.canvas.width / 3, y: ctx.canvas.height / 3 * 2 }, { x: ctx.canvas.width / 3 * 2, y: ctx.canvas.height / 3 * 2 }
                 ];
                 updatedTiles.forEach((t) => {
-                    const ind = t.parentElement.parentElement.parentElement.tabIndex - 3;
+                    const ind = t.parentElement?.parentElement?.parentElement?.tabIndex - 3 || 0;
                     ctx.drawImage(t, pos[ind - 1].x, pos[ind - 1].y);
                 });
             }

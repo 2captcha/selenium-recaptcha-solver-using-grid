@@ -1,7 +1,7 @@
 # reCAPTCHA Solver Using 2Captcha and Selenium
 
 This project automates [bypass Google reCAPTCHA] v2 with image challenges (3x3 and 4x4) using the 2Captcha service 
-([captcha solver]) and Selenium WebDriver. The script programmatically interacts with reCAPTCHA, retrieves data for 
+[captcha solver] and Selenium WebDriver. The script programmatically interacts with reCAPTCHA, retrieves data for 
 solving, sends it to [reCAPTCHA solver] for processing, and then submits the solution.
 
 ![bypass_recaptcha_v2_selenium_final2.gif](media%2Fbypass_recaptcha_v2_selenium_final2.gif)
@@ -32,7 +32,7 @@ The project is structured as follows:
 ### Clone:
 
 ```
-git clone git@github.com:2captcha/selenium-recaptcha-solver-using-grid.git
+git clone https://github.com/2captcha/selenium-recaptcha-solver-using-grid.git
 cd selenium-recaptcha-solver-using-grid
 ```
 
@@ -50,11 +50,13 @@ pip install -r requirements.txt
 
 ### Configure:
 
-Set the `APIKEY` environment variable. You can get the `APIKEY` value in your personal [2captcha account][2captcha].
-
+For Linux/Mac:
 `export APIKEY=your_api_key`
 
-You can also set the value of `APIKEY` directly in the code. To do this, modify the `apikey` value in the following file: [main.py, line 10].
+For Windows:
+`set APIKEY=your_api_key`
+
+You can also set the value of `APIKEY` directly in the code. To do this, modify the `apikey` value in the following file: [main.py line 10].
 
 ### Example Command
 ```bash
