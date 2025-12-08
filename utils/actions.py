@@ -68,7 +68,7 @@ class PageActions:
         :param answer_list: List of cell numbers to click.
         """
         for i in answer_list:
-            self.get_presence_element(f"//table//td[@tabindex='{i}']").click()
+            self.get_presence_element(f"//table//td[@id='{i}']").click()
         print("Cells are marked")
 
     def click_check_button(self, locator):
@@ -81,11 +81,49 @@ class PageActions:
         self.get_clickable_element(locator).click()
         print("Pressed the Check button")
 
-    def check_for_image_updates(self):
+    def reset_image_update_flag(self):
         """
-        Checks if captcha images have been updated using JavaScript.
+        Resets JS flag that tracks recaptcha image updates and
+        starts a new observation window for network requests.
+        """
+        try:
+            self.browser.execute_script(
+                "if (typeof resetImageUpdateFlag === 'function') { resetImageUpdateFlag(); }"
+            )
+            print("Reset image update flag")
+        except Exception as e:
+            print(f"Error while resetting image update flag: {e}")
 
-        :return: Returns True if the images have been updated, False otherwise.
+    def check_for_image_updates(self, expected_updates=None, wait_time=0.5, retries=10):
         """
-        print("Images updated")
-        return self.browser.execute_script("return monitorRequests();")
+        Checks if captcha images have been updated using JavaScript and
+        network request monitoring. Polls the JS flag several times.
+
+        :param expected_updates: Expected number of image replacement
+                                 requests (usually equals number of clicks).
+        :param wait_time: Pause between checks in seconds.
+        :param retries: Number of polling attempts.
+        :return: True if image update requests were detected, False otherwise.
+        """
+        for _ in range(retries):
+            try:
+                if expected_updates is not None:
+                    updated = self.browser.execute_script(
+                        "return (typeof monitorRequests === 'function') && monitorRequests(arguments[0]);",
+                        int(expected_updates),
+                    )
+                else:
+                    updated = self.browser.execute_script(
+                        "return (typeof monitorRequests === 'function') && monitorRequests();"
+                    )
+                if updated:
+                    print("Images updated (network requests detected)")
+                    time.sleep(2)
+                    return True
+            except Exception as e:
+                print(f"Error while checking image updates: {e}")
+                break
+            time.sleep(wait_time)
+
+        print("No image updates detected")
+        return False

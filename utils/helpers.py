@@ -39,7 +39,14 @@ class CaptchaHelper:
             print(f"Captcha solved")
             return result
         except Exception as e:
-            print(f"An error occurred: {e}")
+            message = str(e)
+            print(f"An error occurred: {message}")
+
+            # Special handling for ERROR_CAPTCHA_UNSOLVABLE:
+            # we return a marker so the caller can decide to retry.
+            if "ERROR_CAPTCHA_UNSOLVABLE" in message:
+                return {"unsolvable": True}
+
             return None
 
     def pars_answer(self, answer):
@@ -50,9 +57,10 @@ class CaptchaHelper:
         """
         numbers_str = answer.split(":")[1]
         number_list = list(map(int, numbers_str.split("/")))
-        new_number_list = [i + 3 for i in number_list] # Add 3 to go to the correct index.
+        # DOM cell ids start from 0, while 2Captcha returns 1-based indices.
+        zero_based_list = [i - 1 for i in number_list]
         print("Parsed the response to a list of cell numbers")
-        return new_number_list
+        return zero_based_list
 
     def is_message_visible(self, locator):
         """Checks the visibility of an element with a captcha error message

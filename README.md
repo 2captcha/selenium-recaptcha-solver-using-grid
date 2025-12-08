@@ -1,19 +1,19 @@
 # reCAPTCHA Solver Using 2Captcha and Selenium
 
 This project automates [bypass Google reCAPTCHA] v2 with image challenges (3x3 and 4x4) using the 2Captcha service 
-([captcha solver]) and Selenium WebDriver. The script programmatically interacts with reCAPTCHA, retrieves data for 
+[captcha solver] and Selenium WebDriver (via SeleniumBase). The script programmatically interacts with reCAPTCHA, retrieves data for 
 solving, sends it to [reCAPTCHA solver] for processing, and then submits the solution.
 
 ![bypass_recaptcha_v2_selenium_final2.gif](media%2Fbypass_recaptcha_v2_selenium_final2.gif)
 
-2Captcha service allows you to bypass any CAPTCHA using Selenium. You can find more details on [Selenium captcha solver] page.
+2Captcha service allows you to bypass any CAPTCHA using Selenium / SeleniumBase. You can find more details on [Selenium captcha solver] page.
 
 If you are using JavaScript, we also have a similar example for JavaScript Puppeteer, the example is in the [reCAPTCHA Solver using 2Captcha and Puppeteer] repository.
 
 
 ## Features
 
-- **Selenium WebDriver**: Interacts with the browser and manipulates elements on the reCAPTCHA page.
+- **Selenium WebDriver + SeleniumBase**: Interacts with the browser and manipulates elements on the reCAPTCHA page.
 - **2Captcha API**: Solves image-based captchas using artificial intelligence.
 - Handles both **3x3** and **4x4** captchas with custom logic for each.
 - Modular design with separated logic into helper classes for easy code maintenance and future expansion.
@@ -29,11 +29,11 @@ The project is structured as follows:
 
 ## Usage
 
-### Clone:
+### Clone
 
 ```
-git clone git@github.com:2captcha/selenium-recaptcha-solver-using-grid.git
-cd selenium-recaptcha-solver-using-grid
+git clone git@github.com:2captcha/recaptcha-solver-using-grid.git
+cd recaptcha-solver-using-grid
 ```
 
 ### Requirements
@@ -41,20 +41,21 @@ cd selenium-recaptcha-solver-using-grid
 - Python >= 3.6
 - Installed Selenium WebDriver (for Chrome)
 - [2Captcha account][2captcha] and API key
-- Required Python libraries:
+- Required Python libraries (installed via `requirements.txt`):
   - `selenium`
-  - `twocaptcha-python`
+  - `2captcha-python`
+  - `seleniumbase`
 ```bash
 pip install -r requirements.txt
 ```
 
 ### Configure:
 
-Set the `APIKEY` environment variable. You can get the `APIKEY` value in your personal [2captcha account][2captcha].
+Set the `APIKEY_2CAPTCHA` environment variable. You can get the API key value in your personal [2captcha account][2captcha].
 
-`export APIKEY=your_api_key`
+`export APIKEY_2CAPTCHA=your_api_key`
 
-You can also set the value of `APIKEY` directly in the code. To do this, modify the `apikey` value in the following file: [main.py, line 10].
+You can also set the value of `apikey` directly in the code. To do this, modify the `apikey` value in the following file: [main.py].
 
 ### Example Command
 ```bash
@@ -63,7 +64,7 @@ python main.py
 
 ## How It Works
 
-1. **Browser Initialization:** A browser is opened using Selenium WebDriver.
+1. **Browser Initialization:** A browser is opened using SeleniumBase (on top of Selenium WebDriver).
 2. **Captcha Data Retrieval:** JavaScript extracts the image tiles from reCAPTCHA and sends them to the 2Captcha service for solving.
 3. **Captcha Submission:** Once a solution is received from 2Captcha, Selenium simulates clicking on the correct image tiles based on the solution.
 4. **Final Submission:** The solution is submitted once the captcha is solved.
@@ -92,8 +93,8 @@ The project follows a modular design for better maintainability:
 [selenium]: https://pypi.org/project/selenium/
 [2captcha-python]: https://github.com/2captcha/2captcha-python
 [reCAPTCHA Solver using 2Captcha and Puppeteer]: https://github.com/2captcha/puppeteer-recaptcha-solver-using-clicks
-[main.py, line 10]: ./main.py#L10
+[main.py]: ./main.py
 [bypass Google reCAPTCHA]: https://2captcha.com/p/bypass-recaptcha
 [captcha solver]: https://2captcha.com/
-[reCAPTCHA solver]:https://2captcha.com/
+[reCAPTCHA solver]: https://2captcha.com/
 [Selenium captcha solver]: https://2captcha.com/p/selenium-captcha-solver
